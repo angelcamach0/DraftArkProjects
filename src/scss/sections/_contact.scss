@@ -30,6 +30,7 @@ section#contact {
         }
         .form-control:focus {
             border-color: $primary;
+            
             box-shadow: none;
         }
         ::-webkit-input-placeholder {
