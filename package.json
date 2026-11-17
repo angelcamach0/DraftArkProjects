@@ -10,7 +10,9 @@
         "build:scss": "node scripts/build-scss.js",
         "clean": "node scripts/clean.js",
         "start": "npm run build && node scripts/start.js",
-        "start:debug": "npm run build && node scripts/start-debug.js"
+        "start:debug": "npm run build && node scripts/start-debug.js",
+        "audit:security": "npm audit --audit-level=low",
+        "test:build": "node --test tests/build.test.cjs"
     },
     "description": "Agency is a one page HTML theme for Bootstrap.",
     "keywords": [
@@ -36,17 +38,20 @@
         "url": "https://github.com/StartBootstrap/startbootstrap-agency.git"
     },
     "dependencies": {
-        "bootstrap": "4.5.0"
+        "bootstrap": "4.6.2"
     },
     "devDependencies": {
-        "autoprefixer": "9.8.0",
-        "browser-sync": "2.26.7",
-        "chokidar": "3.4.0",
-        "concurrently": "5.2.0",
-        "postcss": "7.0.32",
-        "prettier": "2.0.5",
-        "pug": "3.0.0",
-        "sass": "1.26.8",
-        "shelljs": "0.8.4"
+        "autoprefixer": "10.6.2",
+        "browser-sync": "3.0.4",
+        "chokidar": "4.0.3",
+        "concurrently": "9.2.5",
+        "postcss": "8.5.33",
+        "prettier": "2.8.8",
+        "pug": "3.0.4",
+        "sass": "1.108.2"
+    },
+    "private": true,
+    "engines": {
+        "node": ">=22.23.0"
     }
 }

@@ -1,7 +1,12 @@
-const sh = require('shelljs');
-const path = require('path');
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
 
-const destPath = path.resolve(path.dirname(__filename), '../dist');
-
-sh.rm('-rf', `${destPath}/*`)
+// This legacy repository also maintains assets directly in dist/assets.
+// Clean generated code only; never delete those hand-maintained assets.
+const destPath = path.resolve(__dirname, '../dist');
+fs.mkdirSync(destPath, { recursive: true });
+for (const entry of ['index.html', 'css', 'js']) {
+    fs.rmSync(path.join(destPath, entry), { recursive: true, force: true });
+}
 

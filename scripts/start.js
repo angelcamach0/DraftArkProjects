@@ -1,19 +1,15 @@
 const concurrently = require('concurrently');
-const path = require('path');
-
-const browserSyncPath = path.resolve(path.dirname(__filename), '../node_modules/.bin/browser-sync');
-
 concurrently([
     { command: 'node scripts/sb-watch.js', name: 'SB_WATCH', prefixColor: 'bgBlue.bold' },
     {
-        command: `"${browserSyncPath}" --reload-delay 2000 --reload-debounce 2000 dist -w --no-online`,
+        command: 'browser-sync start --server dist --watch --reload-delay 2000 --reload-debounce 2000 --listen 127.0.0.1 --no-online --no-open --no-ui',
         name: 'SB_BROWSER_SYNC',
         prefixColor: 'bgGreen.bold',
     }
 ], {
     prefix: 'name',
     killOthers: ['failure', 'success'],
-}).then(success, failure);
+}).result.then(success, failure);
 
 function success() {
     console.log('Success');
@@ -21,4 +17,5 @@ function success() {
 
 function failure() {
     console.log('Failure');
+    process.exitCode = 1;
 }
