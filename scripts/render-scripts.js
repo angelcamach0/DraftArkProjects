@@ -2,7 +2,6 @@
 const fs = require('fs');
 const packageJSON = require('../package.json');
 const path = require('path');
-const sh = require('shelljs');
 
 module.exports = function renderScripts() {
     const sourcePath = path.resolve(path.dirname(__filename), '../src/js/scripts.js');
@@ -17,9 +16,7 @@ module.exports = function renderScripts() {
     const scriptsJS = fs.readFileSync(sourcePath);
     const destPathDirname = path.dirname(destPath);
     
-    if (!sh.test('-e', destPathDirname)) {
-        sh.mkdir('-p', destPathDirname);
-    }
+    fs.mkdirSync(destPathDirname, { recursive: true });
     
     fs.writeFileSync(destPath, copyright + scriptsJS);
 };

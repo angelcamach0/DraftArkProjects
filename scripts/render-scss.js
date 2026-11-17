@@ -5,7 +5,6 @@ const packageJSON = require('../package.json');
 const path = require('path');
 const postcss = require('postcss')
 const sass = require('sass');
-const sh = require('shelljs');
 
 const stylesPath = '../src/scss/styles.scss';
 const destPath = path.resolve(path.dirname(__filename), '../dist/css/styles.css');
@@ -20,9 +19,7 @@ module.exports = function renderSCSS() {
       });
 
     const destPathDirname = path.dirname(destPath);
-    if (!sh.test('-e', destPathDirname)) {
-        sh.mkdir('-p', destPathDirname);
-    }
+    fs.mkdirSync(destPathDirname, { recursive: true });
 
     postcss([ autoprefixer ]).process(results.css, {from: 'styles.css', to: 'styles.css'}).then(result => {
         result.warnings().forEach(warn => {
